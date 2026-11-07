@@ -37,14 +37,14 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-extrabold tracking-tight">موارد الحجاز</h1>
-                    <p class="text-xs text-blue-200">نظام توازن المخزون اللوجستي وتنسيق السائقين والمفاضلة</p>
+                    <p class="text-xs text-blue-200">نظام إدارة توازن المخزون وتنسيق السائقين والمفاضلة</p>
                 </div>
             </div>
             <span id="branch-count-badge" class="bg-blue-800 text-blue-200 text-xs px-3 py-1 rounded-full font-medium border border-blue-700">6 فروع معتمدة</span>
         </div>
     </header>
 
-    <!-- Main Navigation Bar -->
+    <!-- Navigation Tabs -->
     <div class="bg-white border-b border-gray-200 shadow-sm sticky top-[72px] z-40">
         <div class="max-w-5xl mx-auto flex justify-around text-sm font-medium text-gray-600">
             <button onclick="switchTab('uploadTab')" id="btn-uploadTab" class="tab-btn tab-active flex-1 py-3.5 px-2 text-center flex items-center justify-center gap-2">
@@ -63,7 +63,7 @@
         </div>
     </div>
 
-    <!-- Main Container -->
+    <!-- Main Content -->
     <main class="max-w-5xl mx-auto px-4 py-6">
 
         <!-- TAB 1: UPLOAD & ANALYSIS -->
@@ -83,7 +83,7 @@
                 </div>
                 
                 <div class="mt-4 flex items-center justify-center gap-3">
-                    <span class="text-xs text-gray-400">أو تجربة فورية:</span>
+                    <span class="text-xs text-gray-400">أو للتجربة الفورية:</span>
                     <button onclick="loadDemoData()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition-all inline-flex items-center gap-1.5">
                         <i class="fa-solid fa-bolt"></i>
                         <span>تشغيل بيان نموذجي ومفاضلة آلية</span>
@@ -238,7 +238,7 @@
         </div>
     </div>
 
-    <!-- Global Toast -->
+    <!-- Global Toast Notification -->
     <div id="toastNotification" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 transition-all opacity-0 pointer-events-none z-50">
         <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400"></i>
         <span id="toastMessage">تمت العملية بنجاح</span>
@@ -344,7 +344,6 @@
             transferOrders = [];
             let count = 1;
             
-            // Group items by item identifier
             const grouped = {};
             inventoryItems.forEach(item => {
                 const key = item.gtin !== '628110099999' ? item.gtin : item.name;
