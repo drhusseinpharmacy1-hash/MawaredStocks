@@ -36,8 +36,8 @@
                     <i class="fa-solid fa-boxes-stacked text-2xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-extrabold tracking-tight">موارد الحجاز</h1>
-                    <p class="text-xs text-blue-200">نظام إدارة توازن المخزون وتنسيق السائقين والمفاضلة</p>
+                    <h1 class="text-xl font-extrabold tracking-tight">صيدليات موارد الحجاز</h1>
+                    <p class="text-xs text-blue-200">نظام إدارة توازن المخزون اللوجستي وتنسيق السائقين والمفاضلة</p>
                 </div>
             </div>
             <span id="branch-count-badge" class="bg-blue-800 text-blue-200 text-xs px-3 py-1 rounded-full font-medium border border-blue-700">6 فروع معتمدة</span>
@@ -57,7 +57,7 @@
             </button>
             <button onclick="switchTab('driversTab')" id="btn-driversTab" class="tab-btn flex-1 py-3.5 px-2 text-center flex items-center justify-center gap-2 relative">
                 <i class="fa-solid fa-truck-fast text-lg"></i>
-                <span>بوابة السائقين</span>
+                <span>بوابة السائقين والمسارات</span>
                 <span id="pending-count" class="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center mr-1">0</span>
             </button>
         </div>
@@ -128,13 +128,9 @@
                 </div>
 
                 <!-- Export Buttons Per Branch -->
-                <div id="branchExportButtons" class="flex flex-wrap gap-2 pt-1">
-                    <!-- Dynamic Branch Export Buttons -->
-                </div>
+                <div id="branchExportButtons" class="flex flex-wrap gap-2 pt-1"></div>
 
-                <div id="generatedOrdersContainer" class="space-y-3 pt-2">
-                    <!-- Dynamic Orders -->
-                </div>
+                <div id="generatedOrdersContainer" class="space-y-3 pt-2"></div>
             </div>
 
             <!-- Inventory Days of Coverage Table -->
@@ -157,9 +153,7 @@
                                 <th class="p-3">الحالة والتقييم</th>
                             </tr>
                         </thead>
-                        <tbody id="inventoryTableBody" class="divide-y divide-gray-100">
-                            <!-- Dynamic Content -->
-                        </tbody>
+                        <tbody id="inventoryTableBody" class="divide-y divide-gray-100"></tbody>
                     </table>
                 </div>
             </div>
@@ -170,18 +164,12 @@
         <section id="branchesTab" class="tab-content hidden space-y-4">
             <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center">
                 <div>
-                    <h3 class="font-bold text-gray-800 text-sm mb-1">إدارة أفرع موارد الحجاز</h3>
-                    <p class="text-xs text-gray-500">إدارة شبكة الفروع المعتمدة ومسؤولي الاستلام.</p>
+                    <h3 class="font-bold text-gray-800 text-sm mb-1">إدارة شبكة فروع موارد الحجاز الستة</h3>
+                    <p class="text-xs text-gray-500">الإحداثيات الثابتة والمسؤوليين المعتمدين.</p>
                 </div>
-                <button onclick="openAddBranchModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-plus"></i>
-                    <span>إضافة فرع جديد</span>
-                </button>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="branchesList">
-                <!-- Dynamic Branch Cards -->
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="branchesList"></div>
         </section>
 
         <!-- TAB 3: DRIVERS PORTAL -->
@@ -189,8 +177,8 @@
             <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl flex items-start gap-3">
                 <i class="fa-solid fa-circle-info text-amber-600 text-lg mt-0.5"></i>
                 <div class="text-xs text-amber-800">
-                    <p class="font-bold mb-0.5">بوابة السائقين للاستلام الفوري</p>
-                    <p>أوامر التحويل تظهر هنا مباشرة بمجرد إنشائها ليتمكن السائق من حجزها واستلامها.</p>
+                    <p class="font-bold mb-0.5">بوابة السائقين والمسارات الثلاثية الموجهة</p>
+                    <p>أوامر التحويل تظهر هنا مع خيار فتح خرائط جوجل (موقع السائق ➔ الصادر ➔ الوارد).</p>
                 </div>
             </div>
 
@@ -200,43 +188,11 @@
                     <span id="active-orders-badge" class="bg-red-100 text-red-700 text-xs px-2.5 py-0.5 rounded-full font-bold">0 طلبات معلقة</span>
                 </h3>
 
-                <div id="driverOrdersContainer" class="space-y-3">
-                    <!-- Dynamic Driver Orders -->
-                </div>
+                <div id="driverOrdersContainer" class="space-y-3"></div>
             </div>
         </section>
 
     </main>
-
-    <!-- Modal for Adding/Editing Branch -->
-    <div id="branchModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4">
-            <h3 id="modalTitle" class="font-bold text-gray-800 text-base">إضافة فرع جديد</h3>
-            <input type="hidden" id="editIndex" value="-1">
-            <div class="space-y-3 text-xs">
-                <div>
-                    <label class="block text-gray-600 font-bold mb-1">كود الفرع</label>
-                    <input type="text" id="branchCodeInput" class="w-full border border-gray-200 rounded-lg p-2.5 focus:outline-none focus:border-blue-500">
-                </div>
-                <div>
-                    <label class="block text-gray-600 font-bold mb-1">اسم الفرع</label>
-                    <input type="text" id="branchNameInput" class="w-full border border-gray-200 rounded-lg p-2.5 focus:outline-none focus:border-blue-500">
-                </div>
-                <div>
-                    <label class="block text-gray-600 font-bold mb-1">مسؤول الفرع</label>
-                    <input type="text" id="branchManagerInput" class="w-full border border-gray-200 rounded-lg p-2.5 focus:outline-none focus:border-blue-500">
-                </div>
-                <div>
-                    <label class="block text-gray-600 font-bold mb-1">رقم الهاتف</label>
-                    <input type="text" id="branchPhoneInput" class="w-full border border-gray-200 rounded-lg p-2.5 focus:outline-none focus:border-blue-500">
-                </div>
-            </div>
-            <div class="flex justify-end gap-2 pt-2">
-                <button onclick="closeBranchModal()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-xs px-4 py-2 rounded-lg">إلغاء</button>
-                <button onclick="saveBranch()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-lg">حفظ الفرع</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Global Toast Notification -->
     <div id="toastNotification" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 transition-all opacity-0 pointer-events-none z-50">
@@ -246,12 +202,12 @@
 
     <script>
         let branches = [
-            { id: 'BR-001', name: 'الحمدانية 1', mapUrl: 'https://maps.google.com/?q=Al-Hamdaniya+Jeddah', code: 'BR-001', manager: 'أحمد الغامدي', phone: '0501112233' },
-            { id: 'BR-003', name: 'النزهه حراء 3', mapUrl: 'https://maps.google.com/?q=Al-Nuzha+Hira+Jeddah', code: 'BR-003', manager: 'محمد الشهري', phone: '0502223344' },
-            { id: 'BR-004', name: 'فرع الفيصلية 4', mapUrl: 'https://maps.google.com/?q=Al-Faisaliah+Jeddah', code: 'BR-004', manager: 'خالد الحربي', phone: '0503334455' },
-            { id: 'BR-005', name: 'المروه 5', mapUrl: 'https://maps.google.com/?q=Al-Marwa+Jeddah', code: 'BR-005', manager: 'سعيد الزهراني', phone: '0504445566' },
-            { id: 'BR-006', name: 'الصفا 6', mapUrl: 'https://maps.google.com/?q=Al-Safa+Jeddah', code: 'BR-006', manager: 'عمر القحطاني', phone: '0505556677' },
-            { id: 'BR-007', name: 'الصالحيه 7', mapUrl: 'https://maps.google.com/?q=Al-Salihiyah+Jeddah', code: 'BR-007', manager: 'فهد المطيري', phone: '0506667788' }
+            { id: 'BR-001', name: 'الحمدانية 1', map: '21.749516,39.193265', manager: 'دكتور سالم', phone: '0501112233' },
+            { id: 'BR-003', name: 'النزهه حراء 3', map: '21.6168748,39.1709127', manager: 'دكتور حسين', phone: '0566455651' },
+            { id: 'BR-004', name: 'فرع الفيصلية 4', map: '21.568476,39.175672', manager: 'دكتور احمد', phone: '0503334455' },
+            { id: 'BR-005', name: 'المروه 5', map: '21.6131182,39.2092056', manager: 'دكتور رأفت', phone: '0504445566' },
+            { id: 'BR-006', name: 'الصفا 6', map: '21.5742875,39.2041185', manager: 'دكتور كريم', phone: '0505556677' },
+            { id: 'BR-007', name: 'الصالحيه 7', map: '21.7740529,39.2078213', manager: 'د. بسام', phone: '0506667788' }
         ];
 
         let inventoryItems = [];
@@ -267,37 +223,47 @@
         function renderBranches() {
             const container = document.getElementById('branchesList');
             document.getElementById('branch-count-badge').innerText = `${branches.length} فروع معتمدة`;
-            container.innerHTML = branches.map((b, index) => `
+            container.innerHTML = branches.map(b => `
                 <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
                     <div class="flex items-center space-x-3 space-x-reverse">
                         <div class="bg-blue-50 text-blue-600 p-3 rounded-lg font-bold text-xs">${b.id}</div>
                         <div>
                             <h4 class="font-bold text-gray-800 text-sm">${b.name}</h4>
                             <p class="text-xs text-gray-500">المسؤول: ${b.manager} • ${b.phone}</p>
+                            <p class="text-[10px] text-blue-500 font-mono mt-0.5">الإحداثيات: ${b.map}</p>
                         </div>
                     </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=${b.map}" target="_blank" class="bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs px-3 py-2 rounded-lg font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>الخريطة</span>
+                    </a>
                 </div>
             `).join('');
         }
 
+        function getBranchCoords(branchName) {
+            const b = branches.find(item => item.name === branchName);
+            return b ? b.map : '21.7740529,39.2078213';
+        }
+
         function loadDemoData() {
             inventoryItems = [
-                { gtin: '6281100123451', code: 'MED-101', name: 'أوجمنتين 1 غرام أقراص', branch: 'فرع الفيصلية 4', stock: 150, consumption: 20 },
-                { gtin: '6281100123451', code: 'MED-101', name: 'أوجمنتين 1 غرام أقراص', branch: 'المروه 5', stock: 3, consumption: 25 },
-                { gtin: '6281100123452', code: 'MED-102', name: 'بانادول أدفانس 500 مغ', branch: 'الحمدانية 1', stock: 400, consumption: 35 },
-                { gtin: '6281100123452', code: 'MED-102', name: 'بانادول أدفانس 500 مغ', branch: 'النزهه حراء 3', stock: 5, consumption: 30 },
-                { gtin: '6281100123453', code: 'MED-103', name: 'شراب بروفين للأطفال', branch: 'الصفا 6', stock: 120, consumption: 15 },
-                { gtin: '6281100123453', code: 'MED-103', name: 'شراب بروفين للأطفال', branch: 'الصالحيه 7', stock: 2, consumption: 18 }
+                { gtin: '628100990', code: 'DRG-100', name: 'أوجمنتين 1 غرام', branch: 'فرع الفيصلية 4', stock: 150, consumption: 40 },
+                { gtin: '628100990', code: 'DRG-100', name: 'أوجمنتين 1 غرام', branch: 'المروه 5', stock: 5, consumption: 50 },
+                { gtin: '628100991', code: 'DRG-101', name: 'بانادول أدفانس', branch: 'الحمدانية 1', stock: 300, consumption: 100 },
+                { gtin: '628100991', code: 'DRG-101', name: 'بانادول أدفانس', branch: 'النزهه حراء 3', stock: 10, consumption: 90 },
+                { gtin: '628100992', code: 'DRG-102', name: 'بروفين 400 مغ', branch: 'الصفا 6', stock: 120, consumption: 60 },
+                { gtin: '628100992', code: 'DRG-102', name: 'بروفين 400 مغ', branch: 'الصالحيه 7', stock: 4, consumption: 70 }
             ];
 
             transferOrders = [
-                { id: 'ORD-901', gtin: '6281100123451', itemName: 'أوجمنتين 1 غرام أقراص', from: 'فرع الفيصلية 4', to: 'المروه 5', qty: 40, status: 'معلق' },
-                { id: 'ORD-902', gtin: '6281100123452', itemName: 'بانادول أدفانس 500 مغ', from: 'الحمدانية 1', to: 'النزهه حراء 3', qty: 65, status: 'معلق' },
-                { id: 'ORD-903', gtin: '6281100123453', itemName: 'شراب بروفين للأطفال', from: 'الصفا 6', to: 'الصالحيه 7', qty: 30, status: 'معلق' }
+                { id: 'ORD-901', gtin: '628100990', itemName: 'أوجمنتين 1 غرام', from: 'فرع الفيصلية 4', to: 'المروه 5', qty: 45, status: 'معلق' },
+                { id: 'ORD-902', gtin: '628100991', itemName: 'بانادول أدفانس', from: 'الحمدانية 1', to: 'النزهه حراء 3', qty: 70, status: 'معلق' },
+                { id: 'ORD-903', gtin: '628100992', itemName: 'بروفين 400 مغ', from: 'الصفا 6', to: 'الصالحيه 7', qty: 35, status: 'معلق' }
             ];
 
             processAnalysis();
-            showToast('تم تحميل البيانات وتوليد كشوفات الإخراج لجميع الفروع بنجاح!');
+            showToast('تم تحميل البيانات ونماذج المفاضلة بنجاح!');
         }
 
         function handleFileSelect(event) {
@@ -313,25 +279,18 @@
                     const jsonData = XLSX.utils.sheet_to_json(firstSheet);
 
                     if (jsonData.length > 0) {
-                        inventoryItems = jsonData.map(row => {
-                            const nameVal = row['ItemName'] || row['اسم الصنف'] || row['الصنف'] || row['الوصف'] || 'صنف طبي';
-                            const branchVal = row['BranchCode'] || row['الفرع'] || row['اسم الفرع'] || row['الموقع'] || 'الحمدانية 1';
-                            const stockVal = parseInt(row['Stock'] || row['الرصيد'] || row['الرصيد الحالي'] || 0);
-                            const consVal = parseInt(row['MonthlyConsumption'] || row['الاستهلاك الشهري'] || row['الاستهلاك'] || 1);
-                            
-                            return {
-                                gtin: row['GTIN'] || row['رمز GTIN'] || row['الباركود'] || '628110099999',
-                                code: row['ItemCode'] || row['كود الصنف'] || row['الكود'] || 'MED-000',
-                                name: nameVal,
-                                branch: branchVal,
-                                stock: stockVal,
-                                consumption: consVal
-                            };
-                        });
+                        inventoryItems = jsonData.map(row => ({
+                            gtin: row['الباركود الدولي (GTIN)'] || row['GTIN'] || '628100999',
+                            code: row['كود الصنف'] || row['Code'] || 'DRG-000',
+                            name: row['اسم الصنف'] || row['Name'] || 'صنف طبي',
+                            branch: row['الفرع'] || 'الحمدانية 1',
+                            stock: parseInt(row['الرصيد الحالي'] || row['Stock'] || 0),
+                            consumption: parseInt(row['الاستهلاك الشهري'] || row['Consumption'] || 1)
+                        }));
                         
                         generateOrdersFromUpload();
                         processAnalysis();
-                        showToast('تم استيراد ملف الإكسل وتوليد كشوفات الفروع بنجاح!');
+                        showToast('تم استيراد ملف الإكسل وتحليل الأرصدة بنجاح!');
                     }
                 } catch(err) {
                     showToast('حدث خطأ أثناء قراءة ملف الإكسل.', true);
@@ -343,28 +302,25 @@
         function generateOrdersFromUpload() {
             transferOrders = [];
             let count = 1;
-            
             const grouped = {};
             inventoryItems.forEach(item => {
-                const key = item.gtin !== '628110099999' ? item.gtin : item.name;
-                if (!grouped[key]) grouped[key] = [];
-                grouped[key].push(item);
+                if (!grouped[item.name]) grouped[item.name] = [];
+                grouped[item.name].push(item);
             });
 
-            Object.keys(grouped).forEach(key => {
-                const list = grouped[key];
-                const deficitBranch = list.find(i => ((i.stock / (i.consumption || 1)) * 30) < 15);
-                const surplusBranch = list.find(i => ((i.stock / (i.consumption || 1)) * 30) > 45);
+            Object.keys(grouped).forEach(name => {
+                const list = grouped[name];
+                const deficit = list.find(i => ((i.stock / (i.consumption || 1)) * 30) < 15);
+                const surplus = list.find(i => ((i.stock / (i.consumption || 1)) * 30) > 45);
 
-                if (deficitBranch && surplusBranch) {
-                    const transferQty = Math.max(1, Math.round(surplusBranch.stock * 0.35));
+                if (deficit && surplus) {
                     transferOrders.push({
                         id: `ORD-90${count++}`,
-                        gtin: deficitBranch.gtin,
-                        itemName: deficitBranch.name,
-                        from: surplusBranch.branch,
-                        to: deficitBranch.branch,
-                        qty: transferQty,
+                        gtin: deficit.gtin,
+                        itemName: deficit.name,
+                        from: surplus.branch,
+                        to: deficit.branch,
+                        qty: Math.max(10, Math.round(surplus.stock * 0.3)),
                         status: 'معلق'
                     });
                 }
@@ -389,9 +345,9 @@
                     badgeClass = 'badge-danger';
                     statusText = 'عجز (يحتاج إمداد)';
                     totalDeficit++;
-                } else if (days > 60) {
+                } else if (days > 45) {
                     badgeClass = 'badge-warning';
-                    statusText = 'فائض (متاح للمفاضلة)';
+                    statusText = 'فائض (متاح للسحب)';
                     totalSurplus++;
                 }
 
@@ -405,9 +361,7 @@
                         <td class="p-3 font-bold text-gray-800">${item.stock}</td>
                         <td class="p-3 text-gray-500">${item.consumption} / شهر</td>
                         <td class="p-3 font-black text-sm ${days < 15 ? 'text-red-600' : 'text-emerald-600'}">${days} يوم</td>
-                        <td class="p-3">
-                            <span class="px-2.5 py-1 rounded-full text-[11px] font-bold ${badgeClass}">${statusText}</span>
-                        </td>
+                        <td class="p-3"><span class="px-2.5 py-1 rounded-full text-[11px] font-bold ${badgeClass}">${statusText}</span></td>
                     </tr>
                 `;
             }).join('');
@@ -425,11 +379,7 @@
         function renderBranchExportButtons() {
             const container = document.getElementById('branchExportButtons');
             const sourceBranches = [...new Set(transferOrders.map(o => o.from))];
-
-            if (sourceBranches.length === 0) {
-                container.innerHTML = '';
-                return;
-            }
+            if (sourceBranches.length === 0) { container.innerHTML = ''; return; }
 
             container.innerHTML = sourceBranches.map(branchName => `
                 <button onclick="exportSingleBranchExcel('${branchName}')" class="bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5">
@@ -444,39 +394,24 @@
             if (branchOrders.length === 0) return;
 
             const exportData = branchOrders.map((o, idx) => ({
-                'م': idx + 1,
-                'رقم الأمر': o.id,
-                'الفرع المخرج (المصدر)': o.from,
-                'الفرع المستلم (الوجهة)': o.to,
-                'اسم الصنف': o.itemName,
-                'الباركود / GTIN': o.gtin,
-                'الكمية المطلوبة إخراجها': o.qty,
-                'حالة الطلب': o.status
+                'م': idx + 1, 'رقم الأمر': o.id, 'الفرع المصدر (الصادر)': o.from,
+                'الفرع الوارد (الوجهة)': o.to, 'اسم الصنف': o.itemName, 'الكمية المطلوبة': o.qty
             }));
 
             const ws = XLSX.utils.json_to_sheet(exportData);
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "إذن إخراج بضاعة");
-            XLSX.writeFile(wb, `كشف_إخراج_بضاعة_${branchName}.xlsx`);
-            showToast(`تم تحميل كشف الإخراج الخاص بفرع ${branchName}!`);
+            XLSX.utils.book_append_sheet(wb, ws, "إذن إخراج");
+            XLSX.writeFile(wb, `إذن_إخراج_${branchName}.xlsx`);
+            showToast(`تم تنزيل كشف إخراج فرع ${branchName} بنجاح!`);
         }
 
         function exportAllBranchExcelFiles() {
-            if (transferOrders.length === 0) {
-                showToast('لا توجد أوامر مناقلة حالياً للتصدير.', true);
-                return;
-            }
-
-            const sourceBranches = [...new Set(transferOrders.map(o => o.from))];
-            sourceBranches.forEach(b => exportSingleBranchExcel(b));
+            [...new Set(transferOrders.map(o => o.from))].forEach(b => exportSingleBranchExcel(b));
         }
 
         function renderGeneratedOrders() {
             const container = document.getElementById('generatedOrdersContainer');
-            if (transferOrders.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-400 text-center py-3">لا توجد مناقلات مطلوبة حالياً.</p>`;
-                return;
-            }
+            if (transferOrders.length === 0) { container.innerHTML = `<p class="text-xs text-gray-400 text-center py-3">لا توجد مناقلات مطلوبة حالياً.</p>`; return; }
 
             container.innerHTML = transferOrders.map(o => `
                 <div class="p-3.5 border border-blue-100 bg-blue-50/40 rounded-xl flex items-center justify-between">
@@ -485,16 +420,9 @@
                             <span class="font-extrabold text-blue-900 text-xs">${o.id}</span>
                             <span class="text-xs font-bold text-gray-800">${o.itemName}</span>
                         </div>
-                        <div class="text-xs text-gray-600">
-                            من (فائض): <span class="font-bold text-gray-800">${o.from}</span> ➔ إلى (عجز): <span class="font-bold text-gray-800">${o.to}</span>
-                        </div>
+                        <div class="text-xs text-gray-600">الصادر: <strong class="text-gray-800">${o.from}</strong> ➔ الوارد: <strong class="text-gray-800">${o.to}</strong></div>
                     </div>
-                    <div class="text-left flex items-center gap-2">
-                        <span class="bg-blue-600 text-white font-extrabold text-xs px-3 py-1.5 rounded-lg inline-block">${o.qty} قطعة</span>
-                        <button onclick="exportSingleBranchExcel('${o.from}')" class="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 text-xs p-1.5 rounded-lg" title="تنزيل إذن الفرع">
-                            <i class="fa-solid fa-download text-blue-600"></i>
-                        </button>
-                    </div>
+                    <span class="bg-blue-600 text-white font-extrabold text-xs px-3 py-1.5 rounded-lg">${o.qty} قطعة</span>
                 </div>
             `).join('');
         }
@@ -502,46 +430,49 @@
         function renderDriverOrders() {
             const container = document.getElementById('driverOrdersContainer');
             const pendingOrders = transferOrders.filter(o => o.status === 'معلق');
-            
             document.getElementById('pending-count').innerText = pendingOrders.length;
             document.getElementById('active-orders-badge').innerText = `${pendingOrders.length} طلبات معلقة`;
 
             if (transferOrders.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-400 text-center py-6">قم برفع ملف الأرصدة وإجراء المفاضلة أولاً.</p>`;
+                container.innerHTML = `<p class="text-xs text-gray-400 text-center py-6">قم برفع الملف أو تشغيل النموذج لتفعيل المسارات.</p>`;
                 return;
             }
 
-            container.innerHTML = transferOrders.map(o => `
-                <div class="p-4 border border-gray-100 rounded-xl bg-white shadow-sm hover:border-blue-200 transition-all">
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-md">${o.id}</span>
-                            <h4 class="font-bold text-gray-800 text-sm mt-1">${o.itemName}</h4>
-                        </div>
-                        <span class="text-xs font-extrabold px-3 py-1 rounded-full ${o.status === 'معلق' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}">
-                            ${o.status === 'معلق' ? '⏳ معلق (بانتظار السائق)' : '🚚 قيد التوصيل'}
-                        </span>
-                    </div>
+            container.innerHTML = transferOrders.map(o => {
+                const sourceCoords = getBranchCoords(o.from);
+                const targetCoords = getBranchCoords(o.to);
+                const routeUrl = `https://www.google.com/maps/dir/?api=1&destination=${targetCoords}&waypoints=${sourceCoords}&travelmode=driving`;
 
-                    <div class="bg-gray-50 p-2.5 rounded-lg text-xs text-gray-600 space-y-1 mb-3">
-                        <div class="flex items-center gap-1.5"><i class="fa-solid fa-circle-arrow-up text-blue-500"></i> المصدر (فائض): <strong class="text-gray-800">${o.from}</strong></div>
-                        <div class="flex items-center gap-1.5"><i class="fa-solid fa-circle-arrow-down text-emerald-500"></i> الوجهة (عجز): <strong class="text-gray-800">${o.to}</strong></div>
-                        <div class="flex items-center gap-1.5"><i class="fa-solid fa-box text-amber-500"></i> الكمية المحولة: <strong class="text-gray-800">${o.qty} قطعة</strong></div>
-                    </div>
-
-                    ${o.status === 'معلق' ? `
-                        <button onclick="claimOrder('${o.id}')" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-2.5 rounded-lg transition-all shadow-sm flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-hand-pointer"></i>
-                            <span>حجز واستلام الطلب فوراً (Claim Order)</span>
-                        </button>
-                    ` : `
-                        <div class="text-xs text-emerald-700 font-bold bg-emerald-50 p-2 rounded-lg text-center flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span>تم استلام المهمة وجاري التوصيل للفرع</span>
+                return `
+                    <div class="p-4 border border-gray-100 rounded-xl bg-white shadow-sm space-y-3">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">${o.id}</span>
+                                <h4 class="font-bold text-gray-800 text-sm mt-1">${o.itemName} (${o.qty} قطعة)</h4>
+                            </div>
+                            <span class="text-xs font-extrabold px-3 py-1 rounded-full ${o.status === 'معلق' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}">
+                                ${o.status === 'معلق' ? '⏳ معلق' : '🚚 قيد التوصيل'}
+                            </span>
                         </div>
-                    `}
-                </div>
-            `).join('');
+                        <div class="bg-gray-50 p-2.5 rounded-lg text-xs text-gray-600 space-y-1">
+                            <div>🔴 صادر من: <strong>${o.from}</strong></div>
+                            <div>🟢 وارد إلى: <strong>${o.to}</strong></div>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="${routeUrl}" target="_blank" class="flex-1 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-2.5 rounded-lg text-center transition-all flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                                <span>مسار السائق الثلاثي</span>
+                            </a>
+                            ${o.status === 'معلق' ? `
+                                <button onclick="claimOrder('${o.id}')" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-2.5 rounded-lg transition-all flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-hand-pointer"></i>
+                                    <span>حجز الطلب</span>
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         function claimOrder(orderId) {
@@ -549,23 +480,17 @@
             if (order) {
                 order.status = 'مقبول';
                 renderDriverOrders();
-                renderGeneratedOrders();
-                showToast(`تم حجز الطلب ${orderId} بنجاح للسائق!`);
+                showToast(`تم حجز الطلب ${orderId} للسائق بنجاح!`);
             }
         }
 
         function showToast(msg, isError = false) {
             const toast = document.getElementById('toastNotification');
             const toastMsg = document.getElementById('toastMessage');
-            const toastIcon = document.getElementById('toastIcon');
-
+            document.getElementById('toastIcon').className = isError ? "fa-solid fa-circle-xmark text-red-400" : "fa-solid fa-circle-check text-emerald-400";
             toastMsg.innerText = msg;
-            toastIcon.className = isError ? "fa-solid fa-circle-xmark text-red-400" : "fa-solid fa-circle-check text-emerald-400";
-            
             toast.classList.remove('opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'pointer-events-none');
-            }, 3000);
+            setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), 3000);
         }
 
         window.onload = function() {
